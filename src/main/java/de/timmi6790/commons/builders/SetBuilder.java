@@ -5,8 +5,6 @@ import lombok.NonNull;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class SetBuilder<T> {
     private final Set<T> set;
@@ -49,15 +47,7 @@ public class SetBuilder<T> {
         this.addAll(Arrays.asList(values));
         return this;
     }
-
-    public SetBuilder<T> addAll(@NonNull final Predicate<T> ifCondition, @NonNull final Stream<T> values) {
-        return this.addAll(ifCondition, values.collect(Collectors.toList()));
-    }
-
-    public SetBuilder<T> addAll(@NonNull final Stream<T> values) {
-        return this.addAll(values.collect(Collectors.toList()));
-    }
-
+    
     public SetBuilder<T> addAll(@NonNull final Predicate<T> ifCondition, @NonNull final Collection<T> values) {
         for (final T value : values) {
             this.add(value, ifCondition.test(value));

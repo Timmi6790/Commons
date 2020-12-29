@@ -35,7 +35,8 @@ public class ReflectionUtilities {
     }
 
     /**
-     * Convenient utility function that will search for the given annotation for the method, instead of throwing a NullPointerException.
+     * Convenient utility function that will search for the given annotation for the method, instead of throwing a
+     * NullPointerException.
      *
      * @param <T>             the required annotation
      * @param method          the method of the wanted annotation
@@ -61,21 +62,23 @@ public class ReflectionUtilities {
      * @throws IllegalAccessException    the illegal access exception
      * @throws NoSuchMethodException     the no such method exception
      */
-    public void addJarToClassLoader(final File jar, final URLClassLoader urlClassLoader) throws MalformedURLException, InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+    public void addJarToClassLoader(final File jar, final URLClassLoader urlClassLoader)
+            throws MalformedURLException, InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         final Method method = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
         method.setAccessible(true);
         method.invoke(urlClassLoader, jar.toURI().toURL());
     }
 
     /**
-     * Tries to load the given class path from the given urlClassLoader.
-     * Instead of throwing a ClassNotFoundException, returns Optional::emtpy
+     * Tries to load the given class path from the given urlClassLoader. Instead of throwing a ClassNotFoundException,
+     * returns Optional::emtpy
      *
      * @param path           the path
      * @param urlClassLoader the url class loader
      * @return the optional
      */
-    public Optional<Class<?>> loadClassFromClassLoader(@NonNull final String path, @NonNull final URLClassLoader urlClassLoader) {
+    public Optional<Class<?>> loadClassFromClassLoader(@NonNull final String path,
+                                                       @NonNull final URLClassLoader urlClassLoader) {
         try {
             return Optional.of(urlClassLoader.loadClass(path));
         } catch (final ClassNotFoundException ignore) {

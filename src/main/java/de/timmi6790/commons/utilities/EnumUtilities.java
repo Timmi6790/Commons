@@ -6,7 +6,6 @@ import lombok.experimental.UtilityClass;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 
 /**
@@ -21,15 +20,12 @@ public class EnumUtilities {
      * @return the pretty names
      */
     public List<String> getPrettyNames(@NonNull final Enum[] enumValue) {
-        return Arrays.stream(enumValue)
-                .map(EnumUtilities::getPrettyName)
-                .collect(Collectors.toList());
+        return ListUtilities.toStringList(Arrays.asList(enumValue.clone()), EnumUtilities::getPrettyName);
     }
 
     /**
-     * Converts a enum value into a neat formatted text.
-     * It will remove all _ characters and will also capitalize all values after the first part.
-     * TEST_Value -> TestValue
+     * Converts a enum value into a neat formatted text. It will remove all _ characters and will also capitalize all
+     * values after the first part. TEST_Value -> TestValue
      *
      * @param enumValue the enum value
      * @return the pretty name
@@ -46,17 +42,20 @@ public class EnumUtilities {
     }
 
     /**
-     * Searches for the search string against the given enum values.
-     * All enum values are checked with their pretty name {@link #getPrettyName(Enum)}}.
+     * Searches for the search string against the given enum values. All enum values are checked with their pretty name
+     * {@link #getPrettyName(Enum)}}.
      *
-     * @param <T>       the enum type
-     * @param search    the search string
-     * @param enumValue the enum value
+     * @param <T>        the enum type
+     * @param search     the search string
+     * @param enumValues the enum value
      * @return the found enum value
      */
-    public <T extends Enum> Optional<T> getIgnoreCase(@NonNull final String search, @NonNull final T[] enumValue) {
-        return Arrays.stream(enumValue)
-                .filter(value -> getPrettyName(value).equalsIgnoreCase(search))
-                .findAny();
+    public <T extends Enum> Optional<T> getIgnoreCase(@NonNull final String search, @NonNull final T[] enumValues) {
+        for (final T value : enumValues) {
+            if (getPrettyName(value).equalsIgnoreCase(search)) {
+                return Optional.of(value);
+            }
+        }
+        return Optional.empty();
     }
 }

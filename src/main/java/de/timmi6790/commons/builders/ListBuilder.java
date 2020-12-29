@@ -6,8 +6,6 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ListBuilder<T> {
     private final List<T> list;
@@ -49,14 +47,6 @@ public class ListBuilder<T> {
     public final ListBuilder<T> addAll(@Nullable final T... values) {
         this.addAll(Arrays.asList(values));
         return this;
-    }
-
-    public ListBuilder<T> addAll(@NonNull final Predicate<T> ifCondition, @NonNull final Stream<T> values) {
-        return this.addAll(ifCondition, values.collect(Collectors.toList()));
-    }
-
-    public ListBuilder<T> addAll(@NonNull final Stream<T> values) {
-        return this.addAll(values.collect(Collectors.toList()));
     }
 
     public ListBuilder<T> addAll(@NonNull final Predicate<T> ifCondition, @NonNull final Collection<T> values) {

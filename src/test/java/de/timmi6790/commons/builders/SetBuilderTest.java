@@ -90,34 +90,6 @@ class SetBuilderTest {
     }
 
     @Test
-    void addAllStream() {
-        final Set<String> isSet = SetBuilder.<String>ofHashSet()
-                .addAll(Arrays.stream(TEST_VALUES))
-                .build();
-        assertThat(isSet)
-                .hasSize(TEST_VALUES.length)
-                .contains(TEST_VALUES);
-    }
-
-    @Test
-    void addAllStreamIfCondition() {
-        final List<String> addedValues = new ArrayList<>();
-        final Set<String> isSet = SetBuilder.<String>ofHashSet()
-                .addAll(s -> {
-                    final boolean addValue = ThreadLocalRandom.current().nextBoolean();
-                    if (addValue) {
-                        addedValues.add(s);
-                    }
-                    return addValue;
-                }, Arrays.stream(TEST_VALUES))
-                .build();
-
-        assertThat(isSet)
-                .hasSize(addedValues.size())
-                .containsAll(addedValues);
-    }
-
-    @Test
     void addAllCollection() {
         final Set<String> isSet = SetBuilder.<String>ofHashSet()
                 .addAll(Arrays.asList(TEST_VALUES))

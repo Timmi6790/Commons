@@ -3,8 +3,17 @@ package de.timmi6790.commons.utilities;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 
+/**
+ * String utilities.
+ */
 @UtilityClass
 public class StringUtilities {
+    /**
+     * Capitalize the input string.
+     *
+     * @param string the string
+     * @return the capitalized string
+     */
     public String capitalize(@NonNull final String string) {
         if (string.isEmpty()) {
             return string;

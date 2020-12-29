@@ -35,7 +35,9 @@ public class GsonUtilities {
      * @param newVersion the new object version
      * @return success status
      */
-    public <T> boolean saveToJsonIfChanged(@NonNull final Path path, @NonNull final T oldVersion, @NonNull final T newVersion) {
+    public <T> boolean saveToJsonIfChanged(@NonNull final Path path,
+                                           @NonNull final T oldVersion,
+                                           @NonNull final T newVersion) {
         if (oldVersion.equals(newVersion)) {
             return false;
         }
