@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class StringUtilitiesTest {
-
     @ParameterizedTest
     @ValueSource(strings = {"", " ", " test", "test", "test dsad s asdas sa asddasads ", "Hello", "HeLLO"})
     void capitalize(final String value) {

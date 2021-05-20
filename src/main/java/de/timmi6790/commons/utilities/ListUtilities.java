@@ -1,6 +1,7 @@
 package de.timmi6790.commons.utilities;
 
-import lombok.experimental.UtilityClass;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,8 +11,8 @@ import java.util.function.Function;
 /**
  * List utilities.
  */
-@UtilityClass
-public class ListUtilities {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class ListUtilities {
     /**
      * Converts the values into a string list
      *
@@ -20,7 +21,7 @@ public class ListUtilities {
      * @param toStringFunction values to string function
      * @return the string list
      */
-    public <T> List<String> toStringList(final Collection<T> values, final Function<T, String> toStringFunction) {
+    public static <T> List<String> toStringList(final Collection<T> values, final Function<T, String> toStringFunction) {
         return toTypeList(values, toStringFunction);
     }
 
@@ -33,8 +34,8 @@ public class ListUtilities {
      * @param toTypeFunction input type to output type function
      * @return the converted list
      */
-    public <C, T> List<T> toTypeList(final Collection<C> values, final Function<C, T> toTypeFunction) {
-        final List<T> convertedList = new ArrayList<>();
+    public static <C, T> List<T> toTypeList(final Collection<C> values, final Function<C, T> toTypeFunction) {
+        final List<T> convertedList = new ArrayList<>(values.size());
         for (final C value : values) {
             convertedList.add(toTypeFunction.apply(value));
         }

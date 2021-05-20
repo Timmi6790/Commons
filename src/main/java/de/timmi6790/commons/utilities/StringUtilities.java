@@ -1,12 +1,13 @@
 package de.timmi6790.commons.utilities;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.experimental.UtilityClass;
 
 /**
  * String utilities.
  */
-@UtilityClass
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class StringUtilities {
     /**
      * Capitalize the input string.
@@ -14,7 +15,7 @@ public class StringUtilities {
      * @param string the string
      * @return the capitalized string
      */
-    public String capitalize(@NonNull final String string) {
+    public static String capitalize(@NonNull final String string) {
         if (string.isEmpty()) {
             return string;
         }
